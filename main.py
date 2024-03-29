@@ -12,7 +12,7 @@ bot = discord.Bot()
 @bot.slash_command(name="tags", description="Get tag responses")
 async def wiki_search(
         ctx: discord.ApplicationContext,
-        tag: discord.Option(str, choices=get.tags())):
+        tag: discord.Option(str, description="choose a tag", autocomplete=get.tags)):
     embed = discord.Embed(
         description=get.content(tag),
         color=discord.Color.from_rgb(216, 186, 248))
