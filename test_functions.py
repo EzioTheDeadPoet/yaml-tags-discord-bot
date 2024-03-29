@@ -14,3 +14,6 @@ if __name__ == '__main__':
     except KeyError:
         content = "Tag not found"
     print(content)
+    print("---------------------------")
+    print("Get tag content(\"av_test\"):")
+    print(get.content("av_test"))

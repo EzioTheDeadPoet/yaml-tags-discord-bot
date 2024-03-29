@@ -30,4 +30,7 @@ def content(tag: str):
         tag_response = requests.get(response_data[tag], stream=True)
         if tag_response.status_code == 200:
             tag_content = tag_response.text
+        if tag_response.status_code == 404:
+            tag_content = ("404: Tag content not found.\n"
+                           f"This implies a broken source URL in the [tag index]({tag_index}).")
     return tag_content
