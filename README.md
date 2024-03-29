@@ -23,8 +23,8 @@ When you invite the bot to your server make sure you use the `OAuth2` tool to ge
 Docker-Compose.yaml:
 ```yaml
 services:
-  mdbook-search-and-support-discord-bot:
-    image: eziothedeadpoet/mdbook-search-and-support-discord-bot:latest
+  yaml-tags-discord-bot:
+    image: eziothedeadpoet/yaml-tags-discord-bot:latest
     env_file:
       - .env
       - secrets.env
