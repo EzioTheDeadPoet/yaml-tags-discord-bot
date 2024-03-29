@@ -27,10 +27,7 @@ def content(tag: str):
     tag_content = ""
     if response.status_code == 200:
         response_data = yaml.safe_load(response.text)
-        try:
-            tag_response = requests.get(response_data[tag], stream=True)
-            if tag_response.status_code == 200:
-                tag_content = tag_response.text
-        except KeyError:
-            tag_content = "Tag not found."
+        tag_response = requests.get(response_data[tag], stream=True)
+        if tag_response.status_code == 200:
+            tag_content = tag_response.text
     return tag_content

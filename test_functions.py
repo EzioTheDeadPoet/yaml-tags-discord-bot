@@ -8,4 +8,9 @@ if __name__ == '__main__':
     print(get.content("todo"))
     print("-----------------------------")
     print("Get tag content(\"td\"):")
-    print(get.content("td"))
+    content = ""
+    try:
+        content = get.content("td")
+    except KeyError:
+        content = "Tag not found"
+    print(content)

@@ -13,11 +13,19 @@ bot = discord.Bot()
 async def wiki_search(
         ctx: discord.ApplicationContext,
         tag: discord.Option(str, description="choose a tag", autocomplete=get.tags)):
+    content = "Tag not found"
+    ephemeral = False
+    try:
+        content = get.content(tag)
+    except KeyError:
+        ephemeral = True
+
     embed = discord.Embed(
-        description=get.content(tag),
+        description=content,
         color=discord.Color.from_rgb(216, 186, 248))
     embed.set_author(name=f"Tag:{tag}")
-    await ctx.respond(embed=embed)
+
+    await ctx.respond(embed=embed, ephemeral=ephemeral)
 
 
 bot.run(token)
