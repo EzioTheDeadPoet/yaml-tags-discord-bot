@@ -45,5 +45,8 @@ DISCORD_BOT_TOKEN=COPY_TOKEN_HERE
 
 Tags are configured in a YAML file:  
 ```yaml
-tag: https://link.to.raw/tag.md
+tag: 
+  text: https://link.to.raw/tag.md
+  image_url: https://link.to/image.png
 ```
+*Setting an `image_url` is optional.*
