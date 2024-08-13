@@ -1,6 +1,6 @@
-# REST configured tag bot 
+# yaml-tags-discord-bot
 
-This is more of a personal project intended to be used in the Wabbajack community to run search queries and to answer questions in discord.
+This is more of a personal project intended to be used in the Wabbajack community to run search queries and to answer questions in discord. But can possibly be useful for other communities that need tags that post answers to for example frequently asked questions or contain some instructions for common fixes or similar things.
 
 ## How to use
 
