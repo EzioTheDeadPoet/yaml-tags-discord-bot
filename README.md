@@ -33,7 +33,7 @@ services:
 
 .env:
 ```dotenv
-TAG_INDEX=https://raw.githubusercontent.com/EzioTheDeadPoet/tag_repository/master/tags.json
+TAG_INDEX=https://raw.githubusercontent.com/EzioTheDeadPoet/tag_repository/master/tags.yaml
 ```
 
 secrets.env (needs to be created):
