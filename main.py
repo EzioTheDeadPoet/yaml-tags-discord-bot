@@ -12,7 +12,8 @@ bot = discord.Bot()
 @bot.slash_command(name="tags", description="Get tag responses")
 async def wiki_search(
         ctx: discord.ApplicationContext,
-        tag: discord.Option(str, description="choose a tag", autocomplete=get.tags)):
+        tag: discord.Option(str, description="choose a tag", autocomplete=get.tags),
+        ping: discord.Option(discord.Member, "user to ping", required=False)):
     content = {"text": "Tag not found", "image_url": ""}
     ephemeral = False
     truncated_amount = 0
@@ -32,7 +33,10 @@ async def wiki_search(
     embed.set_author(name=f"Tag:{tag}")
     if len(content_image_url) > 0:
         embed.set_image(url=content_image_url)
-    await ctx.respond(embed=embed, ephemeral=ephemeral)
+    if ping:
+        await ctx.respond(f"{ping.mention} Please read this fully, as it will have the answers you need.",embed=embed, ephemeral=ephemeral)
+    else:
+        await ctx.respond(embed=embed, ephemeral=ephemeral)
     if truncated_amount > 0:
         await ctx.respond(f"*The content of `{tag}` has been truncated by `{truncated_amount}` characters "
                           f"to fit the `4096` character limit.\n"
