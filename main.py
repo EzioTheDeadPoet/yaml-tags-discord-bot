@@ -1,13 +1,16 @@
 import os
+from idlelib.window import add_windows_to_menu
+
 import discord
 from dotenv import load_dotenv
 from rest_repository import get
+
+print(f"Initializing")
 
 load_dotenv()
 
 token = os.getenv("DISCORD_BOT_TOKEN")
 bot = discord.Bot()
-
 
 @bot.slash_command(name="tags", description="Get tag responses")
 async def wiki_search(
@@ -43,4 +46,6 @@ async def wiki_search(
                           f"Please shorten the tag content to fix this.*")
 
 
+print(f"Start Bot")
 bot.run(token)
+bot.sync_commands(force=True)
