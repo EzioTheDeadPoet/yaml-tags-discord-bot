@@ -1,18 +1,22 @@
 import os
+from idlelib.window import add_windows_to_menu
+
 import discord
 from dotenv import load_dotenv
 from rest_repository import get
+
+print(f"Initializing")
 
 load_dotenv()
 
 token = os.getenv("DISCORD_BOT_TOKEN")
 bot = discord.Bot()
 
-
 @bot.slash_command(name="tags", description="Get tag responses")
 async def wiki_search(
         ctx: discord.ApplicationContext,
-        tag: discord.Option(str, description="choose a tag", autocomplete=get.tags)):
+        tag: discord.Option(str, description="choose a tag", autocomplete=get.tags),
+        ping: discord.Option(discord.Member, "user to ping", required=False)):
     content = {"text": "Tag not found", "image_url": ""}
     ephemeral = False
     truncated_amount = 0
@@ -32,11 +36,16 @@ async def wiki_search(
     embed.set_author(name=f"Tag:{tag}")
     if len(content_image_url) > 0:
         embed.set_image(url=content_image_url)
-    await ctx.respond(embed=embed, ephemeral=ephemeral)
+    if ping:
+        await ctx.respond(f"{ping.mention} Please read this fully, as it will have the answers you need.",embed=embed, ephemeral=ephemeral)
+    else:
+        await ctx.respond(embed=embed, ephemeral=ephemeral)
     if truncated_amount > 0:
         await ctx.respond(f"*The content of `{tag}` has been truncated by `{truncated_amount}` characters "
                           f"to fit the `4096` character limit.\n"
                           f"Please shorten the tag content to fix this.*")
 
 
+print(f"Start Bot")
 bot.run(token)
+bot.sync_commands(force=True)
