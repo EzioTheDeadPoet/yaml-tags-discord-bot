@@ -11,6 +11,7 @@ tag_index = os.getenv('TAG_INDEX')
 
 
 async def tags(ctx: discord.AutocompleteContext):
+    await ctx.interaction.response.defer()
     response = requests.get(tag_index, stream=True)
     tags_list = []
     if response.status_code == 200:

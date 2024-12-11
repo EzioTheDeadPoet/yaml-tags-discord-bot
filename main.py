@@ -8,6 +8,10 @@ from rest_repository import get
 print(f"Initializing")
 
 load_dotenv()
+try:
+    load_dotenv("secrets.env")
+except Exception as e:
+    print(e)
 
 token = os.getenv("DISCORD_BOT_TOKEN")
 bot = discord.Bot()
@@ -17,6 +21,7 @@ async def wiki_search(
         ctx: discord.ApplicationContext,
         tag: discord.Option(str, description="choose a tag", autocomplete=get.tags),
         ping: discord.Option(discord.Member, "user to ping", required=False)):
+    await ctx.defer()
     content = {"text": "Tag not found", "image_url": ""}
     ephemeral = False
     truncated_amount = 0
