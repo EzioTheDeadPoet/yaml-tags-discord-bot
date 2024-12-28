@@ -53,4 +53,3 @@ async def wiki_search(
 
 print(f"Start Bot")
 bot.run(token)
-bot.sync_commands(force=True)
