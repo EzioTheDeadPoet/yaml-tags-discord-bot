@@ -24,18 +24,19 @@ async def tags(ctx: discord.AutocompleteContext):
 
 
 def content(tag: str):
+    lower_case_tag = tag.lower()
     response = requests.get(tag_index, stream=True)
     tag_content = {"text": "", "image_url": ""}
     if response.status_code == 200:
         response_data = yaml.safe_load(response.text)
-        tag_response = requests.get(response_data[tag]["text"], stream=True)
+        tag_response = requests.get(response_data[lower_case_tag]["text"], stream=True)
         if tag_response.status_code == 200:
             tag_content["text"] = tag_response.text
         if tag_response.status_code == 404:
             tag_content["text"] = ("404: Tag content not found.\n"
                                    f"This implies a broken source URL in the [tag index]({tag_index}).")
         try:
-            tag_content["image_url"] = response_data[tag]["image_url"]
+            tag_content["image_url"] = response_data[lower_case_tag]["image_url"]
         except KeyError:
             tag_content["image_url"] = ""
     return tag_content
